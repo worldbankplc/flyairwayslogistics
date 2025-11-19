@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parcel Tracking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="lo.png" class="icon"></img>
+      <span class="brand-name"><strong>FLY AIRWAYS LOGISTICS</strong></span>
+    </div>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="About.html">About</a>
+      <a href="help.html">Help</a>
+    </nav>
+  </header>
+
+
+  <main>
+    <section class="tracking-box">
+      <form onsubmit="handleTrack(event)">
+        <input type="text" id="trackingNumber" placeholder="Enter Tracking Number" required>
+         <button type="submit">Track</button>
+      </form>
+      
+    </section>
+  </main>
+  
+  <section class="sectionc">
+    <h2>Take control of your deliveries, fast and reliable.</h2>
+  <div class="container">
+    <div class="item">
+      <img src="road.jpg" alt="Road Image" class="box" />
+      <div class="box-text">Fast Delivery</div>
+    </div>
+    <div class="item">
+       <img src="road2.jpg" alt="Road Image" class="box" />
+      <div class="box-text">At Your Door Step</div>
+    </div>
+    <div class="item">
+       <img src="road3.jpg" alt="Road Image" class="box" />
+      <div class="box-text">Safe in Good Condition</div>
+    </div>
+  </div>
+  </section>
+
+        <section class="contact">
+        <h2>Contact Us</h2>
+        <p>For support or inquiries, email us at:</p>
+        <a href="mailto:flyairwayslogistics@gmail.com">flyairwayslogistics@gmail.com</a>
+      </section>
+
+
+<script>
+  function handleTrack(event) {
+    event.preventDefault();
+
+    const input = document.getElementById("trackingNumber").value.trim();
+    const errorDiv = document.getElementById("errorMessage");
+    // List of valid tracking codes
+    const validCodes = ["FAL-217F402M7"];
+
+        // Clear previous errors
+    if (input === "") {
+      errorDiv.textContent = "Please enter a tracking number.";
+      return;
+    }
+
+    if (input === "") {
+      alert("Please enter a tracking number.");
+      return;
+    }
+
+    if (!validCodes.includes(input)) {
+      alert("Incorrect tracking Number.");
+      return;
+    }
+
+    // Redirect to page2.html with tracking number as a query string
+    window.location.href = `map.html?track=${encodeURIComponent(input)}`;
+  }
+</script>
+
+
+
+
+    <footer>
+    <p>&copy; 2025 Fly Airways Logistics.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shipment Tracking</title>
+  <link rel="stylesheet" href="map.css">
+    <body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="lo.png" class="icon"></img>
+      <span><strong>FLY AIRWAYS LOGISTICS</strong></span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="About.html">About</a>
+      <a href="help.html">Help</a>
+    </nav>
+  </header>
+
+<section class="track">
+      <div class="tracking">
+      <h4>Tarcking Number<br>FAL-217F402M7</h4>
+</section>
+
+<section class="map">
+  <img src="co.png" alt="map">
+</section>
+
+<section class="sectiontwo">
+  <div class="timeline">
+    <div class="event">
+      <div class="dot green"></div>
+      <div class="date">Wed, 24 April 2024</div>
+      <div>Shipment Ready To Be Delivered to Philippines</div>
+    </div>
+    <div class="event">
+      <div class="dot orange"></div>
+      <div class="date">Thurs, 25 April 2024</div>
+      <div>Shipment has been recieved at FLY WAREHOUSE Mexico</div>
+    </div>
+    <div class="event">
+      <div class="dot gray"></div>
+      <div class="date">Fri, 26 April 2024</div>
+      <div>Item Leaving Mexico</div>
+    </div>
+
+        <div class="event">
+      <div class="dot red"></div>
+      <div class="date">Fri, 26 April 2024</div>
+      <div>Package on its way to Philippines</div>
+    </div>
+
+    <div class="event">
+      <div class="dot blue"></div>
+      <div class="date">Sat, 27 April, 2024</div>
+      <div>Item Arrived At Ninoy Aquino International Airport</div>
+    </div>
+
+    <div class="event">
+      <div class="dot blue"></div>
+      <div class="date">Tue, 18 November, 2025</div>
+      <div>Ready To Be Delivered at 0123 Sto Tomas Ourok 3 Subic Zambales, Philippines.</div>
+    </div>
+  </div>
+  </section>
+
+  <section class="sectionthree">
+    <div class="button">
+    <a href="details.html"><button type="butto">View package details</button></a>
+  
+  </section>
+
+
+
+  <div class="barcode">
+    <img src="https://barcode.tec-it.com/barcode.ashx?data=2601729756&code=Code128&translate-esc=on" alt="Barcode">
+  </div>
+
+</body>
+</html>
+
+
+    <script>
+const params = new URLSearchParams(window.location.search);
+const code = params.get("track");
+
+if (code) {
+document.getElementById("trackingInfo").textContent = `Your tracking number is: ${code}`;
+} else {
+document.getElementById("trackingInfo").textContent = "No tracking number provided.";
+}
+</script>
+
+<script>
+// ✅ Get current date in Brazil timezone
+function getBrazilDate() {
+  const options = { timeZone: 'America/Sao_Paulo', year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' };
+  return new Date().toLocaleDateString('en-US', options);
+}
+
+// ✅ Update dots based on current Brazil date
+function updateTimelineDots() {
+  const currentBrazilDate = new Date(getBrazilDate()).toDateString();
+  const events = document.querySelectorAll('.timeline .event');
+
+  events.forEach(event => {
+    const dateDiv = event.querySelector('.date');
+    const dot = event.querySelector('.dot');
+
+    // Normalize the event date
+    const eventDate = new Date(dateDiv.textContent.trim()).toDateString();
+
+    // If today's date matches the event date → highlight
+    if (eventDate === currentBrazilDate) {
+      dot.style.backgroundColor = 'blue';
+    }
+
+    // ✅ Special rule: if it's Oct 3, keep the dot permanently
+    if (eventDate.includes("Fri Oct 03 2025")) {
+      const today = new Date(currentBrazilDate);
+      const target = new Date("2025-10-03");
+
+      if (today >= target) {
+        dot.style.backgroundColor = 'blue'; // Keep highlighted
+      }
+    }
+  });
+}
+
+// Run immediately + check hourly
+updateTimelineDots();
+setInterval(updateTimelineDots, 60 * 60 * 1000);
+</script>
+
+
+
+  </div>
+</body>
+</html>
